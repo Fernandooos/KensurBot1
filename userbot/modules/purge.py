@@ -15,7 +15,7 @@ from userbot.events import register
 
 @register(outgoing=True, pattern=r"^\.purge$")
 async def fastpurger(purg):
-    """For .purge command, purge all messages starting from the reply."""
+    """Para usar o comando .purge, responda a primeira mensagem de onde devo começar."""
     chat = await purg.get_input_chat()
     msgs = []
     itermsg = purg.client.iter_messages(chat, min_id=purg.reply_to_msg_id)
@@ -30,12 +30,12 @@ async def fastpurger(purg):
                 await purg.client.delete_messages(chat, msgs)
                 msgs = []
     else:
-        return await purg.edit("**I need a mesasge to start purging from.**")
+        return await purg.edit("**Eu preciso de uma mensagem para começar a exclusão.**")
 
     if msgs:
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
-        purg.chat_id, "**Exclusão rapida completa!**" f"\nPurged {str(count)} messages"
+        purg.chat_id, "**Limpeza rápida completa!**" f"\nPurged {str(count)} messages"
     )
     await sleep(2)
     await done.delete()
@@ -43,7 +43,7 @@ async def fastpurger(purg):
 
 @register(outgoing=True, pattern=r"^\.purgeme")
 async def purgeme(delme):
-    """For .purgeme, delete x count of your latest message."""
+    """Com .purgeme você pode excluir as suas ultimas mensagens."""
     message = delme.text
     count = int(message[9:])
     i = 1
@@ -56,7 +56,7 @@ async def purgeme(delme):
 
     smsg = await delme.client.send_message(
         delme.chat_id,
-        "**Purge complete!** Purged " + str(count) + " messages.",
+        "**Limpeza completa!** Foram excluidas " + str(count) + " mensagens.",
     )
     await sleep(2)
     i = 1
@@ -65,19 +65,19 @@ async def purgeme(delme):
 
 @register(outgoing=True, pattern=r"^\.del$")
 async def delete_it(delme):
-    """For .del command, delete the replied message."""
+    """Para usar o comando .del responda uma mensagem."""
     msg_src = await delme.get_reply_message()
     if delme.reply_to_msg_id:
         try:
             await msg_src.delete()
             await delme.delete()
         except rpcbaseerrors.BadRequestError:
-            await delme.edit("**Well, I can't delete a message.**")
+            await delme.edit("**Bom, não consegui excluir a mensagem.**")
 
 
 @register(outgoing=True, pattern=r"^\.edit")
 async def editer(edit):
-    """For .editme command, edit your last message."""
+    """Usar o comando .editme edita sua ultima mensagem."""
     message = edit.text
     chat = await edit.get_input_chat()
     self_id = await edit.client.get_peer_id("me")
@@ -93,7 +93,7 @@ async def editer(edit):
 
 @register(outgoing=True, pattern=r"^\.sd")
 async def selfdestruct(destroy):
-    """For .sd command, make seflf-destructable messages."""
+    """Usar o comando .sd habilita a auto-destruição de mensagens."""
     message = destroy.text
     counter = int(message[4:6])
     text = str(destroy.text[6:])
