@@ -205,7 +205,7 @@ def migration_workaround():
         f"A change in IP address is detected, waiting for {sleep_time / 60} minutes before starting the bot."
     )
     sleep(sleep_time)
-    LOGS.info("Starting bot...")
+    LOGS.info("Iniciando bot...")
 
     delgvar("public_ip")
     addgvar("public_ip", new_ip)
@@ -266,10 +266,10 @@ with bot:
 async def update_restart_msg(chat_id, msg_id):
     DEFAULTUSER = ALIVE_NAME or "Set `ALIVE_NAME` ConfigVar!"
     message = (
-        f"**KensurBot v{KENSURBOT_VERSION} is back up and running!**\n\n"
-        f"**Telethon:** {version.__version__}\n"
-        f"**Python:** {python_version()}\n"
-        f"**User:** {DEFAULTUSER}"
+        f"🔥 **KensurBot v{KENSURBOT_VERSION} iniciado!**\n\n"
+        f"🔥 **Telethon:** {version.__version__}\n"
+        f"🔥 **Python:** {python_version()}\n"
+        f"🔥 **Usuário:** {DEFAULTUSER}"
     )
     await bot.edit_message(chat_id, msg_id, message)
     return True
