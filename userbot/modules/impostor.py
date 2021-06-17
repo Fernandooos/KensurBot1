@@ -15,13 +15,13 @@ async def impostor(event):
     inputArgs = event.pattern_match.group(1)
 
     if "restore" in inputArgs:
-        await event.edit("**Reverting to my true identity...**")
+        await event.edit("**Voltando para minha personalidade verdadeira...**")
         if not STORAGE.userObj:
             return await event.edit(
                 "**You need to impersonate a profile before reverting!**"
             )
         await updateProfile(STORAGE.userObj, restore=True)
-        return await event.edit("**Feels good to be back!**")
+        return await event.edit("**Como é bom estar de volta!**")
     if inputArgs:
         try:
             user = await event.client.get_entity(inputArgs)
@@ -41,9 +41,9 @@ async def impostor(event):
 
     LOGS.info(STORAGE.userObj)
 
-    await event.edit("**Stealing this random person's identity...**")
+    await event.edit("**Roubando a identidade dessa pessoa aleatória...**")
     await updateProfile(userObj)
-    await event.edit("**I am you and you are me.**")
+    await event.edit("**Eu sou você e você sou eu!**")
 
 
 async def updateProfile(userObj, restore=False):
